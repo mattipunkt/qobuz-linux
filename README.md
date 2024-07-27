@@ -12,7 +12,7 @@ I built this app, because my main browser Firefox is only playing MP3-quality st
 - [ ] Maybe more ;)
 
 ## Installation
-Go to [releases](https://github.com/mukkematti/qobuz-linux/releases) and download the implementation you like.
+Go to [releases](https://github.com/mattipunkt/qobuz-linux/releases) and download the implementation you like.
 I recommend installing as a flatpak. Download the `.flatpak`-file and run the following command:
 ```bash
 flatpak install qobuz-linux_1.0.0-x86_64.flatpak
