@@ -28,7 +28,7 @@ snap install qobuz-linux_1.0.0_amd64.snap --dangerous
 
 
 
-## Acknowladgements
+## Acknowledgements
 - The Icon was made by me. It used the following graphics:
     - `cd-symbolic`-icon from Adwaita icon package (Creative Commons Zero v1.0 Universell)
     - The letter Q from Cantarell font family
