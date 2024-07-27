@@ -1,0 +1,4 @@
+extends: ./build/electron-builder.base.yml
+linux:
+  target:
+    - dir

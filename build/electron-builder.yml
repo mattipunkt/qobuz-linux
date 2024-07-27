@@ -1,0 +1,12 @@
+extends: ./build/electron-builder.base.yml
+linux:
+  target:
+    - flatpak
+    - AppImage
+    - snap
+win:
+  target: msi
+  icon: icon.png
+  artifactName: "qobuz-linux"
+  appId: dev.mukkematti.qobuz-linux
+  executableName: qobuzlinux
