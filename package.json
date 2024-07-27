@@ -1,0 +1,28 @@
+{
+  "name": "qobuz-linux",
+  "version": "1.0.0",
+  "description": "A simple wrapper for Qobuz to use on Linux (Hi-Res working)",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mattipunkt/qobuz-linux.git"
+  },
+  "keywords": [
+    "qobuz",
+    "linux",
+    "hires",
+    "electron"
+  ],
+  "author": "Matti Weidlich",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mattipunkt/qobuz-linux/issues"
+  },
+  "homepage": "https://github.com/mattipunkt/qobuz-linux#readme",
+  "devDependencies": {
+    "electron": "^31.3.0"
+  }
+}
