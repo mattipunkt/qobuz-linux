@@ -19,6 +19,13 @@ flatpak install qobuz-linux_1.0.0-x86_64.flatpak
 ```
 You may be prompted to enter a root password.
 
+**Install as snap**
+On the releases-page, download the `.snap`-file. Install snap with the following command:
+```bash
+snap install qobuz-linux_1.0.0_amd64.snap --dangerous
+```
+
+
 
 ## Acknowladgements
 - The Icon was made by me. It used the following graphics:
