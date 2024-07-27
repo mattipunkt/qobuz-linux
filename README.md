@@ -6,7 +6,7 @@ I built this app, because my main browser Firefox is only playing MP3-quality st
 
 ### TO-DO
 - [ ] Implementing MPRIS Support
-~~- [X] Build .deb and .rpm~~ (go to releases :))
+- ~~[X] Build .deb and .rpm~~ (go to releases :))
 - [ ] push to flathub
 - [ ] push to Snap Store
 - [ ] Maybe more ;)
