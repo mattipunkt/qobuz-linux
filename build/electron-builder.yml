@@ -10,3 +10,6 @@ win:
   artifactName: "qobuz-linux"
   appId: dev.mukkematti.qobuz-linux
   executableName: qobuzlinux
+flatpak:
+  runtimeVersion: 23.08
+  baseVersion: 23.08
