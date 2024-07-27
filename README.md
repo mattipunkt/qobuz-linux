@@ -20,4 +20,12 @@ flatpak install qobuz-linux_1.0.0-x86_64.flatpak
 You may be prompted to enter a root password.
 
 
-## 
+## Acknowladgements
+- The Icon was made by me. It used the following graphics:
+    - `cd-symbolic`-icon from Adwaita icon package (Creative Commons Zero v1.0 Universell)
+    - The letter Q from Cantarell font family
+
+
+## DISCLAIMER
+This is an unofficial project. I am not associated with Qobuz in any way and this project has not been endorsed by Qobuz (yet).
+Use on your own risk.
