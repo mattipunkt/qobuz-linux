@@ -5,7 +5,7 @@ This is an UNOFFICIAL wrapper around the Qobuz Webplayer. Since it uses Electron
 I built this app, because my main browser Firefox is only playing MP3-quality streams, even if I enable DRM-features in settings.
 
 ### TO-DO
-- [ ] Implementing MPRIS Support
+- [X] ~~(Implementing MPRIS Support)~~ seems to work, my arch-test machine seemed to have missing dependencies -> mint shows it works
 - [X] ~~Build .deb and .rpm~~ (go to releases :))
 - [ ] push to flathub
 - [ ] push to Snap Store
