@@ -1,6 +1,6 @@
 {
   "name": "qobuz-linux",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple wrapper for Qobuz to use on Linux (Hi-Res working)",
   "main": "src/main.js",
   "scripts": {
