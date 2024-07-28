@@ -14,7 +14,13 @@ const createWindow = () => {
     })
     win.removeMenu()
     win.loadURL(qobuz_url)
-    }
+
+    win.on('close', (e) => {
+            e.preventDefault()
+            win.hide()
+        }
+    )
+}
 
 
 
