@@ -8,7 +8,7 @@ I built this app, because my main browser Firefox is only playing MP3-quality st
 - [X] ~~(Implementing MPRIS Support)~~ seems to work, my arch-test machine seemed to have missing dependencies -> mint shows it works
 - [X] ~~Build .deb and .rpm~~ (go to releases :))
 - [ ] push to flathub
-- [ ] push to Snap Store
+- [X] ~~push to Snap Store~~
 - [ ] Maybe more ;)
 
 ## Installation
