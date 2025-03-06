@@ -1,0 +1,54 @@
+name: build-and-publish
+
+on: [push]
+
+jobs:
+  build:
+    name: Build binaries and release preview build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+
+    - name: Check out Repository
+      uses: actions/checkout@v2
+
+    - name: Install Packages and Set-Up
+      run: |
+        sudo apt install flatpak flatpak-builder npm
+        sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+        base_version=$(cat build/electron-builder.yml | sed -nE 's/[[:space:]]*baseVersion: ([0-9]+\.[0-9]+)/\1/p')
+        runtime_version=$(cat build/electron-builder.yml | sed -nE 's/[[:space:]]*runtimeVersion: ([0-9]+\.[0-9]+)/\1/p')
+        sudo flatpak install app/org.electronjs.Electron2.BaseApp/x86_64/$base_version -y
+        sudo flatpak install runtime/org.freedesktop.Sdk/x86_64/$runtime_version -y
+
+    - name: Prep Version String in package.json
+      run: |
+        version="$(cat VERSION)-$(git log --pretty=format:'%h' -1)"
+        echo "COMMIT=$(git log --pretty=format:'%h' -1)" >> $GITHUB_ENV
+        echo "VERSION=$version" >> $GITHUB_ENV
+        jq --arg version "$version" '.version = $version' package.json > temp.json
+        mv temp.json package.json
+
+    - name: Run Build
+      run: |
+        npm install
+        # Uncomment to Run in Debug Mode
+        # export DEBUG="@malept/flatpak-bundler"
+        npm run build
+
+    - name: Release Artifacts
+      uses: "marvinpinto/action-automatic-releases@latest"
+      with:
+        repo_token: "${{ secrets.GH_TOKEN }}"
+        automatic_release_tag: "${{ env.VERSION }}"
+        prerelease: true
+        title: "Development Build based on commit ${{ env.COMMIT }}" 
+        files: |
+          dist/qobuz-linux-${{ env.VERSION }}*.flatpak
+          dist/qobuz-linux_${{ env.VERSION }}*.snap
+          dist/qobuz-linux-${{ env.VERSION }}*.AppImage
+
+
+    
