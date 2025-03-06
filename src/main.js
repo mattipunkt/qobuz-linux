@@ -23,12 +23,18 @@ const createWindow = () => {
 }
 
 
+const gotTheLock = app.requestSingleInstanceLock({});
+if (!gotTheLock) {
+  app.quit();
+}
 
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') app.quit()
 })
 
-
+app.on("second-instance", () => {
+  win.show();
+});
 
 app.whenReady().then(() => {
 
