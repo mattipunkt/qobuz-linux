@@ -1,6 +1,6 @@
 {
   "name": "qobuz-linux",
-  "version": "1.0.1",
+  "version": "1.0.1-fe2ed56",
   "description": "A simple wrapper for Qobuz to use on Linux (Hi-Res working)",
   "main": "src/main.js",
   "scripts": {
@@ -37,6 +37,6 @@
   "homepage": "https://github.com/mattipunkt/qobuz-linux#readme",
   "devDependencies": {
     "electron": "^31.3.0",
-    "electron-builder": "^24.13.3"
+    "electron-builder": "^25.1.8"
   }
 }
