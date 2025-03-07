@@ -26,6 +26,7 @@ const createWindow = () => {
 const gotTheLock = app.requestSingleInstanceLock({});
 if (!gotTheLock) {
   app.quit();
+  process.quit();
 }
 
 app.on('window-all-closed', () => {
