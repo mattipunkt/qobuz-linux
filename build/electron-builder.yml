@@ -11,5 +11,5 @@ win:
   appId: dev.mukkematti.qobuz-linux
   executableName: qobuzlinux
 flatpak:
-  runtimeVersion: 23.08
-  baseVersion: 23.08
+  runtimeVersion: 24.08
+  baseVersion: 24.08

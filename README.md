@@ -11,6 +11,30 @@ I built this app, because my main browser Firefox is only playing MP3-quality st
 - [X] ~~push to Snap Store~~
 - [ ] Maybe more ;)
 
+## Building
+
+### Flatpak
+
+First, generate NPM build sources:
+
+```bash
+$ pip install git+https://github.com/flatpak/flatpak-builder-tools.git#subdirectory=node
+$ flatpak-node-generator npm package-lock.json --output flatpak/generated-sources.json
+```
+
+Next, install flatpak SDKs:
+
+```bash
+$ flatpak install org.flatpak.Builder org.freedesktop.Sdk//24.08 org.freedesktop.Sdk.Extension.node24//24.08
+```
+
+Finally, build the flatpak:
+
+```bash
+$ flatpak run org.flatpak.Builder --repo=_repo --force-clean _build flatpak/dev.mukkematti.qobuz-linux.yml
+$ flatpak build-bundle _repo qobuz-linux.flatpak dev.mukkematti.qobuz-linux
+```
+
 ## Installation
 Go to [releases](https://github.com/mattipunkt/qobuz-linux/releases) and download the implementation you like.
 I recommend installing as a flatpak. Download the `.flatpak`-file and run the following command:

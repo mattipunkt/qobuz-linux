@@ -1,0 +1,14 @@
+[Desktop Entry]
+Name=Qobuz
+Exec=run.sh %U
+Terminal=false
+Type=Application
+Icon=dev.mukkematti.qobuz-linux
+StartupWMClass=qobuz
+Encoding=UTF-8
+GenericName=Qobuz
+Comment=A simple wrapper for Qobuz to use on Linux (Hi-Res working)
+StartupNotify=true
+Categories=AudioVideo;
+X-PulseAudio-Properties=media.role=music
+MimeType=x-scheme-handler/qobuz;
