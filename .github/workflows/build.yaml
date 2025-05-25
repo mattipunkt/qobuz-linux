@@ -33,7 +33,7 @@ jobs:
 
     - name: Run Build
       run: |
-        sudo -i
+        su -l
         flatpak run org.flatpak.Builder --repo=_repo --force-clean _build flatpak/dev.mukkematti.qobuz-linux.yml
         flatpak build-bundle _repo qobuz-linux-${{ env.VERSION }}.flatpak dev.mukkematti.qobuz-linux
 
