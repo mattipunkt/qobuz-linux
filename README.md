@@ -25,7 +25,7 @@ $ flatpak-node-generator npm package-lock.json --output flatpak/generated-source
 Next, install flatpak SDKs:
 
 ```bash
-$ flatpak install org.flatpak.Builder org.freedesktop.Sdk//24.08 org.freedesktop.Sdk.Extension.node24//24.08
+$ flatpak install org.flatpak.Builder org.freedesktop.Sdk//24.08 org.freedesktop.Sdk.Extension.node24//24.08 org.freedesktop.Platform//24.08 org.electronjs.Electron2.BaseApp//24.08
 ```
 
 Finally, build the flatpak:
