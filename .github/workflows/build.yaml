@@ -17,6 +17,7 @@ jobs:
     - name: Install Packages and Set-Up
       run: |
         sudo apt install flatpak flatpak-builder npm python3-pip
+        flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
         sudo pip install git+https://github.com/flatpak/flatpak-builder-tools.git#subdirectory=node
         sudo flatpak-node-generator npm package-lock.json --output flatpak/generated-sources.json
         flatpak install org.flatpak.Builder org.freedesktop.Sdk//24.08 org.freedesktop.Sdk.Extension.node24//24.08 org.freedesktop.Platform//24.08 org.electronjs.Electron2.BaseApp//24.08
