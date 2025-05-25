@@ -16,12 +16,11 @@ jobs:
 
     - name: Install Packages and Set-Up
       run: |
-        sudo apt install flatpak flatpak-builder npm
-        sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-        base_version=$(cat build/electron-builder.yml | sed -nE 's/[[:space:]]*baseVersion: ([0-9]+\.[0-9]+)/\1/p')
-        runtime_version=$(cat build/electron-builder.yml | sed -nE 's/[[:space:]]*runtimeVersion: ([0-9]+\.[0-9]+)/\1/p')
-        sudo flatpak install app/org.electronjs.Electron2.BaseApp/x86_64/$base_version -y
-        sudo flatpak install runtime/org.freedesktop.Sdk/x86_64/$runtime_version -y
+        sudo apt install flatpak flatpak-builder npm python3-pip
+        sudo pip install git+https://github.com/flatpak/flatpak-builder-tools.git#subdirectory=node
+        sudo flatpak-node-generator npm package-lock.json --output flatpak/generated-sources.json
+        flatpak install org.flatpak.Builder org.freedesktop.Sdk//24.08 org.freedesktop.Sdk.Extension.node24//24.08 org.freedesktop.Platform//24.08 org.electronjs.Electron2.BaseApp//24.08
+        
 
     - name: Prep Version String in package.json
       run: |
@@ -33,10 +32,8 @@ jobs:
 
     - name: Run Build
       run: |
-        npm install
-        # Uncomment to Run in Debug Mode
-        # export DEBUG="@malept/flatpak-bundler"
-        npm run build
+        flatpak run org.flatpak.Builder --repo=_repo --force-clean _build flatpak/dev.mukkematti.qobuz-linux.yml
+        flatpak build-bundle _repo qobuz-linux.flatpak dev.mukkematti.qobuz-linux
 
     - name: Release Artifacts
       uses: "marvinpinto/action-automatic-releases@latest"
@@ -46,9 +43,6 @@ jobs:
         prerelease: true
         title: "Development Build based on commit ${{ env.COMMIT }}" 
         files: |
-          dist/qobuz-linux-${{ env.VERSION }}*.flatpak
-          dist/qobuz-linux_${{ env.VERSION }}*.snap
-          dist/qobuz-linux-${{ env.VERSION }}*.AppImage
-
+          qobuz-linux.flatpak
 
     
