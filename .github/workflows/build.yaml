@@ -33,8 +33,8 @@ jobs:
 
     - name: Run Build
       run: |
-        sudo flatpak run org.flatpak.Builder --repo=_repo --force-clean _build flatpak/dev.mukkematti.qobuz-linux.yml
-        sudo flatpak build-bundle _repo qobuz-linux-${{ env.VERSION }}.flatpak dev.mukkematti.qobuz-linux
+        flatpak run org.flatpak.Builder --repo=_repo --force-clean _build flatpak/dev.mukkematti.qobuz-linux.yml
+        flatpak build-bundle _repo qobuz-linux-${{ env.VERSION }}.flatpak dev.mukkematti.qobuz-linux
 
     - name: Release Artifacts
       uses: "marvinpinto/action-automatic-releases@latest"
