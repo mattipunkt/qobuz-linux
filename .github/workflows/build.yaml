@@ -33,8 +33,8 @@ jobs:
 
     - name: Run Build
       run: |
-        flatpak run org.flatpak.Builder --repo=_repo --force-clean _build flatpak/dev.mukkematti.qobuz-linux.yml
-        flatpak build-bundle _repo qobuz-linux.flatpak dev.mukkematti.qobuz-linux
+        sudo flatpak run org.flatpak.Builder --repo=_repo --force-clean _build flatpak/dev.mukkematti.qobuz-linux.yml
+        sudo flatpak build-bundle _repo qobuz-linux-${{ env.VERSION }}.flatpak dev.mukkematti.qobuz-linux
 
     - name: Release Artifacts
       uses: "marvinpinto/action-automatic-releases@latest"
@@ -44,6 +44,6 @@ jobs:
         prerelease: true
         title: "Development Build based on commit ${{ env.COMMIT }}" 
         files: |
-          qobuz-linux.flatpak
+          qobuz-linux-${{ env.VERSION }}.flatpak
 
     
