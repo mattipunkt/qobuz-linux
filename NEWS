@@ -1,0 +1,15 @@
+Version 1.0.1
+~~~~~~~~~~~~~~~~~~~~
+Released: 2024-07-28
+
+Features:
+* When the Window is closed, it is moved into Tray
+* Enabled Tray-Icon
+* Restoring/completely quitting Window through tray
+
+Version 1.0.0
+~~~~~~~~~~~~~~~~~~~~
+Released: 2024-07-27
+
+Features:
+* This is the first release with just basic features, but playback works (even in Hi-Res) so have fun :)
