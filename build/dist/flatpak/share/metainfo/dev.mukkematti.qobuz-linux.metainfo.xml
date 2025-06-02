@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component type="desktop-application">
+  <id>dev.mukkematti.qobuz-linux</id>
+  <name>Qubuz</name>
+  <summary>A small electron-wrapper for Qobuz streaming service</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT</project_license>
+  <description>
+    <p>This is an UNOFFICIAL wrapper around the Qobuz Webplayer. Since it uses Electron, playing HiRes through widevine is also possible. I built this app, because my main browser Firefox is only playing MP3-quality streams, even if I enable DRM-features in settings.</p>
+  </description>
+  <developer id="space.pleura">
+    <name>Matti Punkt</name>
+  </developer>
+  <launchable type="desktop-id">dev.mukkematti.qobuz-linux.desktop</launchable>
+  <url type="homepage">https://github.com/mattipunkt/qobuz-linux</url>
+  <url type="bugtracker">https://github.com/mattipunkt/qobuz-linux/issues</url>
+  <screenshots>
+  </screenshots>
+  <categories>
+    <category>AudioVideo</category>
+  </categories>
+  <releases>
+  </releases>
+  <content_rating type="oars-1.1"/>
+</component>
