@@ -35,7 +35,8 @@ modules:
         npm run builder -- $ELECTRON_BUILDER_ARCH_ARGS --linux --dir
       - cp -a dist/linux*unpacked ${FLATPAK_DEST}/main
       - mkdir -p ${FLATPAK_DEST}/share/metainfo
-      - appstreamcli news-to-metainfo --format=markdown NEWS build/dist/flatpak/share/metainfo/${FLATPAK_ID}.metainfo.xml ${FLATPAK_DEST}/share/metainfo/${FLATPAK_ID}.metainfo.xml
+      - appstreamcli news-to-metainfo --format=markdown NEWS build/dist/flatpak/share/metainfo/${FLATPAK_ID}.metainfo.xml.in ${FLATPAK_DEST}/share/metainfo/${FLATPAK_ID}.metainfo.xml
+      - appstreamcli validate --no-net --strict ${FLATPAK_DEST}/share/metainfo/${FLATPAK_ID}.metainfo.xml
       - install -Dm644 build/icons/512x512.png                                     ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.png
       - install -Dm644 build/dist/flatpak/share/applications/${FLATPAK_ID}.desktop ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
       - install -Dm755 build/dist/flatpak/bin/run.sh                               ${FLATPAK_DEST}/bin/run.sh
