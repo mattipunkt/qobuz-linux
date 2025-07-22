@@ -20,6 +20,13 @@ build-options:
   append-path: /usr/lib/sdk/node24/bin
   env:
     NPM_CONFIG_LOGLEVEL: info
+  arch:
+    x86_64:
+      env:
+        ELECTRON_BUILDER_ARCH: x64
+    aarch64:
+      env:
+        ELECTRON_BUILDER_ARCH: arm64
 modules:
   - name: qobuz-linux
     buildsystem: simple

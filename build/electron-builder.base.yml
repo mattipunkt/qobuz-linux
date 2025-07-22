@@ -16,18 +16,7 @@ linux:
     - dir
   executableName: qobuz-linux
   desktop:
-    Encoding: UTF-8
-    Name: Qobuz
-    GenericName: Qobuz
-    Comment: A simple electron wrapper for Qobuz (with Hi Res Support)
-    Icon: dev.mukkematti.qobuz_linux
-    StartupNotify: true
-    Terminal: false
-    Type: Application
-    Categories: Network;Application;AudioVideo;Audio;Video
-    StartupWMClass: qobuz
-    X-PulseAudio-Properties: media.role=music
-    MimeType: x-scheme-handler/qobuz;
+    entry: build/qobuz-linux.desktop
 
 mac:
   category: public.app-category.entertainment
