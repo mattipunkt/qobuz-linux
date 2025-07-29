@@ -5,7 +5,6 @@ on: [push]
 jobs:
   build-and-upload:
     name: Build for ${{ matrix.arch }}
-    timeout-minutes: 60
 
     strategy:
       fail-fast: false
@@ -43,7 +42,6 @@ jobs:
         npm run build-base
 
     - name: Build Flatpak repo
-      timeout-minutes: 45
       run: |
         flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
         flatpak remote-add --user --if-not-exists flathub-beta https://flathub.org/beta-repo/flathub-beta.flatpakrepo
