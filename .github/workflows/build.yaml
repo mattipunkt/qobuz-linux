@@ -30,8 +30,19 @@ jobs:
         sudo apt-get install -y flatpak flatpak-builder jq
         pipx install flatpak-node-generator
 
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+
+    - name: Install npm dependencies and verify build
+      run: |
+        npm ci
+        npm run build-base
+
     - name: Build Flatpak repo
-      timeout-minutes: 15
+      timeout-minutes: 20
       run: |
         flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
         flatpak remote-add --user --if-not-exists flathub-beta https://flathub.org/beta-repo/flathub-beta.flatpakrepo
@@ -39,7 +50,7 @@ jobs:
         flatpak --user remote-modify --enable flathub-beta
         git config --global --add safe.directory /__w/qobuz-linux/qobuz-linux
         flatpak-node-generator npm package-lock.json
-        flatpak-builder --arch=${{ matrix.arch }} --jobs=2 --user --disable-rofiles-fuse --install-deps-from=flathub --force-clean --repo=repo _build flatpak/dev.mukkematti.qobuz-linux.yml
+        flatpak-builder --arch=${{ matrix.arch }} --jobs=1 --user --disable-rofiles-fuse --install-deps-from=flathub --force-clean --repo=repo _build flatpak/dev.mukkematti.qobuz-linux.yml
 
     - name: Upload Flatpak repo artifact
       uses: actions/upload-artifact@v4
