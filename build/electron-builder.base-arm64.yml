@@ -1,0 +1,32 @@
+appId: dev.mukkematti.qobuz-linux
+electronVersion: 31.7.7
+# Use standard Electron for ARM64 since castlabs doesn't provide ARM64 binaries
+electronDownload:
+  version: 31.7.7
+  mirror: https://github.com/electron/electron/releases/download/v
+snap:
+  plugs:
+    - default
+    - screen-inhibit-control
+extraResources:
+  - "themes/**"
+linux:
+  category: AudioVideo
+  icon: build/icons
+  target:
+    - dir
+  executableName: qobuz-linux
+  desktop:
+    entry: build/qobuz-linux.desktop
+
+mac:
+  category: public.app-category.entertainment
+win:
+  icon: icon.png
+  artifactName: "qobuzlinux"
+  appId: dev.mukkematti.qobuz-linux
+  executableName: qobuzlinux
+protocols:
+  name: "qobuz"
+  role: "Viewer"
+  schemes: ["qobuz"]

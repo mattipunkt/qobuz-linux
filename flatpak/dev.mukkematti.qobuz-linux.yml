@@ -44,7 +44,11 @@ modules:
       - npm install --offline --no-audit --no-fund --ignore-scripts
       - |
         . ../flatpak-node/electron-builder-arch-args.sh
-        npm run builder -- $ELECTRON_BUILDER_ARCH_ARGS --linux --dir --config.compression=store
+        if [ "${ELECTRON_BUILDER_ARCH}" = "arm64" ]; then
+          npm run builder -- $ELECTRON_BUILDER_ARCH_ARGS --linux --dir --config.compression=store -c ./build/electron-builder.base-arm64.yml
+        else
+          npm run builder -- $ELECTRON_BUILDER_ARCH_ARGS --linux --dir --config.compression=store
+        fi
       - cp -a dist/linux*unpacked ${FLATPAK_DEST}/main
       - mkdir -p ${FLATPAK_DEST}/share/metainfo
       - appstreamcli news-to-metainfo --format=markdown NEWS build/dist/flatpak/share/metainfo/${FLATPAK_ID}.metainfo.xml.in ${FLATPAK_DEST}/share/metainfo/${FLATPAK_ID}.metainfo.xml
