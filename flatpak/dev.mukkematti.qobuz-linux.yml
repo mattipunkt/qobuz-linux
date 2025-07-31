@@ -35,11 +35,16 @@ modules:
         XDG_CACHE_HOME: /run/build/qobuz-linux/flatpak-node/cache
         npm_config_cache: /run/build/qobuz-linux/flatpak-node/npm-cache
         npm_config_offline: 'true'
+        npm_config_progress: 'false'
+        npm_config_loglevel: 'error'
+        npm_config_audit: 'false'
+        npm_config_fund: 'false'
+        ELECTRON_SKIP_BINARY_DOWNLOAD: '1'
     build-commands:
-      - npm install --offline
+      - npm install --offline --no-audit --no-fund --ignore-scripts
       - |
         . ../flatpak-node/electron-builder-arch-args.sh
-        npm run builder -- $ELECTRON_BUILDER_ARCH_ARGS --linux --dir
+        npm run builder -- $ELECTRON_BUILDER_ARCH_ARGS --linux --dir --config.compression=store
       - cp -a dist/linux*unpacked ${FLATPAK_DEST}/main
       - mkdir -p ${FLATPAK_DEST}/share/metainfo
       - appstreamcli news-to-metainfo --format=markdown NEWS build/dist/flatpak/share/metainfo/${FLATPAK_ID}.metainfo.xml.in ${FLATPAK_DEST}/share/metainfo/${FLATPAK_ID}.metainfo.xml
