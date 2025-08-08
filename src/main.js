@@ -11,10 +11,6 @@ const createWindow = () => {
       width: 1200,
       height: 800,
       icon: path.join(__dirname, "../resources/icons/clearicon.png"),
-      webPreferences: {
-        webSecurity: false,
-        contextIsolation: false
-      },
       useContentSize: true,
       frame: true,
       titleBarStyle: 'default'
