@@ -13,10 +13,22 @@ const createWindow = () => {
       icon: path.join(__dirname, "../resources/icons/clearicon.png"),
       useContentSize: true,
       frame: true,
-      titleBarStyle: 'default'
+      titleBarStyle: 'default',
+      webPreferences: {
+        preload: path.join(__dirname, 'preload.js')
+      }
     })
     win.removeMenu()
     win.loadURL(qobuz_url)
+
+    win.webContents.on('did-finish-load', () => {
+        const css = `
+            body, html, #app, #app > div {
+                min-width: 0 !important;
+            }
+        `;
+        win.webContents.insertCSS(css);
+    });
 
     win.on('close', (e) => {
             e.preventDefault()
