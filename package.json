@@ -38,6 +38,6 @@
   "homepage": "https://github.com/mattipunkt/qobuz-linux#readme",
   "devDependencies": {
     "electron": "^31.7.7",
-    "electron-builder": "^25.1.8"
+    "electron-builder": "^26.0.12"
   }
 }
