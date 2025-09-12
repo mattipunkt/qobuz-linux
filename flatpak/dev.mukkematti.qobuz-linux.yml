@@ -2,11 +2,10 @@ app-id: dev.mukkematti.qobuz-linux
 runtime: org.freedesktop.Platform
 runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
-base: org.electronjs.Electron2.BaseApp
-base-version: '31'
+
 sdk-extensions:
   - org.freedesktop.Sdk.Extension.node24
-command: run.sh
+command: qobuz-linux
 separate-locales: false
 finish-args:
   - --share=ipc
@@ -39,19 +38,20 @@ modules:
         npm_config_loglevel: 'error'
         npm_config_audit: 'false'
         npm_config_fund: 'false'
-        ELECTRON_SKIP_BINARY_DOWNLOAD: '1'
+
     build-commands:
       - npm install --offline --no-audit --no-fund --ignore-scripts
       - |
         . ../flatpak-node/electron-builder-arch-args.sh
         npm run builder -- $ELECTRON_BUILDER_ARCH_ARGS --linux --dir --config.compression=store
-      - cp -a dist/linux*unpacked ${FLATPAK_DEST}/main
+      - cp -a dist/linux*unpacked/* ${FLATPAK_DEST}/
+      - install -Dm755 ${FLATPAK_DEST}/qobuz-linux ${FLATPAK_DEST}/bin/qobuz-linux
       - mkdir -p ${FLATPAK_DEST}/share/metainfo
       - appstreamcli news-to-metainfo --format=markdown NEWS build/dist/flatpak/share/metainfo/${FLATPAK_ID}.metainfo.xml.in ${FLATPAK_DEST}/share/metainfo/${FLATPAK_ID}.metainfo.xml
       - appstreamcli validate --no-net --strict ${FLATPAK_DEST}/share/metainfo/${FLATPAK_ID}.metainfo.xml
       - install -Dm644 build/icons/512x512.png                                     ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.png
       - install -Dm644 build/dist/flatpak/share/applications/${FLATPAK_ID}.desktop ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
-      - install -Dm755 build/dist/flatpak/bin/run.sh                               ${FLATPAK_DEST}/bin/run.sh
+
     subdir: main
     sources:
       - type: dir
