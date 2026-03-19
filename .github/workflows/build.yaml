@@ -45,9 +45,10 @@ jobs:
         flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
         flatpak --user remote-modify --enable flathub
         git config --global --add safe.directory /__w/qobuz-linux/qobuz-linux
-        # Generate flatpak sources from the exact package-lock.json that npm ci uses
-        rm -f generated-sources.json
+        # Generate flatpak sources in the flatpak/ directory where the manifest expects them
+        rm -f flatpak/generated-sources.json
         flatpak-node-generator --no-requests-cache npm package-lock.json
+        mv generated-sources.json flatpak/generated-sources.json
         flatpak-builder --arch=${{ matrix.arch }} --jobs=1 --user --disable-rofiles-fuse --install-deps-from=flathub --force-clean --repo=repo _build flatpak/dev.mukkematti.qobuz-linux.yml
 
     - name: Upload Flatpak repo artifact

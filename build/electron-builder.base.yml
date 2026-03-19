@@ -3,15 +3,20 @@ electronVersion: 31.7.7
 electronDownload:
   version: 31.7.7
   mirror: https://github.com/electron/electron/releases/download/v
+files:
+  - "**/*"
+  - "!.flatpak-builder${/*}"
+  - "!_build${/*}"
+  - "!repo${/*}"
+  - "!flatpak${/*}"
 snap:
   plugs:
     - default
     - screen-inhibit-control
-extraResources:
-  - "themes/**"
 linux:
   category: AudioVideo
   icon: build/icons
+  maintainer: Matti Weidlich <mattipunkt@users.noreply.github.com>
   target:
     - dir
   executableName: qobuz-linux
