@@ -59,6 +59,12 @@ modules:
       - type: dir
         path: ..
         dest: main
+        skip:
+          - .flatpak-builder
+          - _build
+          - repo
+          - dist
+          - qobuz-linux.flatpak
       - type: script
         dest: main
         dest-filename: run.sh
