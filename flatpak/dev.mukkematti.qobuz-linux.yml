@@ -2,6 +2,8 @@ app-id: dev.mukkematti.qobuz-linux
 runtime: org.freedesktop.Platform
 runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
+base: org.electronjs.Electron2.BaseApp
+base-version: '24.08'
 
 sdk-extensions:
   - org.freedesktop.Sdk.Extension.node24
@@ -62,5 +64,5 @@ modules:
         dest-filename: run.sh
         commands:
           - export TMPDIR="$XDG_RUNTIME_DIR/app/$FLATPAK_ID"
-          - exec /app/main/qobuz-linux "$@"
+          - exec zypak-wrapper /app/main/qobuz-linux "$@"
       - generated-sources.json
