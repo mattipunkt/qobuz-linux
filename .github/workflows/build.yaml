@@ -45,9 +45,8 @@ jobs:
         flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
         flatpak --user remote-modify --enable flathub
         git config --global --add safe.directory /__w/qobuz-linux/qobuz-linux
-        # Generate flatpak sources from the exact package-lock.json that npm ci uses
-        rm -f generated-sources.json
-        flatpak-node-generator --no-requests-cache npm package-lock.json
+        flatpak-node-generator npm package-lock.json -o flatpak/generated-sources.json
+        sed -i 's|git+ssh://git@github.com|https://github.com|g' flatpak/generated-sources.json
         flatpak-builder --arch=${{ matrix.arch }} --jobs=1 --user --disable-rofiles-fuse --install-deps-from=flathub --force-clean --repo=repo _build flatpak/dev.mukkematti.qobuz-linux.yml
 
     - name: Upload Flatpak repo artifact
@@ -86,8 +85,15 @@ jobs:
     - name: Get Version and Commit
       id: get_version
       run: |
-        echo "VERSION=$(jq -r .version package.json)" >> $GITHUB_ENV
-        echo "COMMIT=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+        VERSION=$(jq -r .version package.json)
+        COMMIT=$(git rev-parse --short HEAD)
+        echo "VERSION=$VERSION" >> $GITHUB_ENV
+        echo "COMMIT=$COMMIT" >> $GITHUB_ENV
+        if [ "${{ github.repository_owner }}" != "mattipunkt" ]; then
+          echo "TAG_NAME=${VERSION}-${COMMIT}" >> $GITHUB_ENV
+        else
+          echo "TAG_NAME=${VERSION}" >> $GITHUB_ENV
+        fi
 
     - name: Create multi-arch Flatpak bundle
       run: |
@@ -96,9 +102,10 @@ jobs:
     - name: Release Artifacts
       uses: "softprops/action-gh-release@v2"
       with:
-        tag_name: "${{ env.VERSION }}"
+        tag_name: "${{ env.TAG_NAME }}"
         prerelease: true
         name: "Development Build based on commit ${{ env.COMMIT }}"
         files: qobuz-linux-${{ env.VERSION }}.flatpak
+        make_latest: ${{ github.repository_owner == 'mattipunkt' }}
 
     

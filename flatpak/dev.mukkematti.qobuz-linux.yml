@@ -2,19 +2,22 @@ app-id: dev.mukkematti.qobuz-linux
 runtime: org.freedesktop.Platform
 runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
+base: org.electronjs.Electron2.BaseApp
+base-version: '24.08'
 
 sdk-extensions:
   - org.freedesktop.Sdk.Extension.node24
-command: qobuz-linux
+command: run.sh
 separate-locales: false
 finish-args:
   - --share=ipc
-  - --socket=fallback-x11
+  - --socket=x11
   - --socket=wayland
   - --device=dri
   - --socket=pulseaudio
   - --share=network
   - --talk-name=org.mpris.MediaPlayer2.*
+  - --env=ELECTRON_OZONE_PLATFORM_HINT=auto
 build-options:
   append-path: /usr/lib/sdk/node24/bin
   env:
@@ -44,8 +47,8 @@ modules:
       - |
         . ../flatpak-node/electron-builder-arch-args.sh
         npm run builder -- $ELECTRON_BUILDER_ARCH_ARGS --linux --dir --config.compression=store
-      - cp -a dist/linux*unpacked/* ${FLATPAK_DEST}/
-      - install -Dm755 ${FLATPAK_DEST}/qobuz-linux ${FLATPAK_DEST}/bin/qobuz-linux
+      - cp -a dist/linux*unpacked ${FLATPAK_DEST}/main
+      - install -Dm755 run.sh ${FLATPAK_DEST}/bin/run.sh
       - mkdir -p ${FLATPAK_DEST}/share/metainfo
       - appstreamcli news-to-metainfo --format=markdown NEWS build/dist/flatpak/share/metainfo/${FLATPAK_ID}.metainfo.xml.in ${FLATPAK_DEST}/share/metainfo/${FLATPAK_ID}.metainfo.xml
       - appstreamcli validate --no-net --strict ${FLATPAK_DEST}/share/metainfo/${FLATPAK_ID}.metainfo.xml
@@ -57,4 +60,16 @@ modules:
       - type: dir
         path: ..
         dest: main
+        skip:
+          - .flatpak-builder
+          - _build
+          - repo
+          - dist
+          - qobuz-linux.flatpak
+      - type: script
+        dest: main
+        dest-filename: run.sh
+        commands:
+          - export TMPDIR="$XDG_RUNTIME_DIR/app/$FLATPAK_ID"
+          - exec zypak-wrapper /app/main/qobuz-linux "$@"
       - generated-sources.json
