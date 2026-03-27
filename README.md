@@ -1,3 +1,8 @@
+> This project is unmaintained (and generally was just a small project to play around with electron). I will not maintain this project any further and will archive the repository on March, 27th 2026!
+>
+> I recommend switching to [vicrodh/qbz](https://github.com/vicrodh/qbz)!
+
+
 # Qobuz for Linux
 ![Qobuz-for-Linux-logo](https://raw.githubusercontent.com/mattipunkt/qobuz-linux/a1c4e8fddd63a4b899955c36aa9c55c75020d73c/build/icons/128x128.png)
 
