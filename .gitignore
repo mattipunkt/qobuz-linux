@@ -132,5 +132,11 @@ dist
 
 venv/
 
+# Flatpak build output
+.flatpak-builder/
+_build/
+repo/
+generated-sources.json
+
 # Crush directory
 .crush
